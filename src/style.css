@@ -1,0 +1,24 @@
+:root {
+    --background-color: rgb(39, 39, 39);
+}
+
+* {
+    border: 1px solid cyan;
+    color: white;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: auto;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.sidebar {
+    height: 100%;
+}
+
+.main {
+    height: 100%;
+}

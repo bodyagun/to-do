@@ -4,10 +4,57 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>to-do</title>
+    <title>My Tasks</title>
+    <script type="module" src="./src/main.js" defer></script>
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./src/style.css">
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <div class="container">
+      <div class="sidebar">
+        <div class="top">
+          <h1>Planner</h1>
+        </div>
+
+        <div class="bottom">
+          <div class="global">
+            <button>All Tasks</button>
+            <button>Done</button>
+            <button>Due</button>
+          </div>
+
+          <div class="projects">
+            <div class="proj-title">
+              <p>Your Projects</p>
+            </div>
+            <p>Projects will appear here</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="header">
+          <h2 id="project-curr">project-curr placeholder</h2>
+        </div>
+
+        <div class="tasks">
+    <div class="task-table-header">
+      <span>Title</span>
+      <span>Due Date</span>
+      <span>Priority</span>
+      <span>Status</span>
+      <span></span>
+    </div>
+
+    <div class="task-list" id="task-list">
+    </div>
+        </div>
+
+        <div class="adder">
+          <button id="addTaskBtn">+</button>
+        </div>
+
+      </div>
+    </div>
   </body>
 </html>
