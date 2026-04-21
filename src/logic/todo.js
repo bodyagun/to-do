@@ -1,7 +1,7 @@
 function currentDate() {
     const now = new Date();
     const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Add 1 because Jan is 0
+    const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
     return formattedDate
@@ -37,10 +37,6 @@ export default class Todo {
     }
 
     toggleStatus() {
-        if (this.status === true) {
-            this.status = false
-        } else if (this.status === false) {
-            this.status = true
-        }
+    this.stauts = !this.status    
     }
 }
