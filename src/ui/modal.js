@@ -1,4 +1,4 @@
-export default function openModal() {
+export function openModal() {
         let modal = document.getElementById("modal")
         modal.innerHTML = `
         <form id="todo-form">
@@ -29,7 +29,7 @@ export default function openModal() {
         `
 }
 
-export default function openProjectModal() {
+export function openProjectModal() {
     let modal = document.getElementById("modal")
     modal.innerHTML = `
     <form id="project-form">
