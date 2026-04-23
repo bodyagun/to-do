@@ -48,8 +48,16 @@ addProjectBtn.addEventListener("click", () => {
         let title = document.getElementById("project-title")
         let project = new Project(title.value)
         projects.push(project)
+        setCurrentProject(project)
         renderProjects(projects, setCurrentProject)
         modalOverlay.classList.add("hidden")
     })
     modalOverlay.classList.remove("hidden")
+})
+
+const allTasks = document.getElementById("alltasks")
+allTasks.addEventListener("click", () => {
+    const allTodos = projects.flatMap(p => p.todos)
+    const taskList = document.getElementById("task-list")
+    renderTodos(allTodos, currentProject)
 })

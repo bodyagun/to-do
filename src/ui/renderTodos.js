@@ -1,4 +1,6 @@
-    export function renderTodo(todo, currentProject) {
+import { openEditModal } from "./modal.js"
+
+export function renderTodo(todo, currentProject) {
         let taskList = document.getElementById("task-list")
 
         let task = document.createElement("div")
@@ -22,23 +24,32 @@
 
         let deleteTask = document.createElement("button")
         deleteTask.textContent = "Delete"
-
         deleteTask.dataset.id = todo.id
-
         deleteTask.addEventListener("click", (e) => {
                     currentProject.removeTodo(deleteTask.dataset.id)
                     task.remove()
                 })
+
+        let edit = document.createElement("button")
+        edit.textContent = "Edit"
+        edit.addEventListener("click", () => {
+            let modalOverlay = document.getElementById("modal-overlay")
+            modalOverlay.classList.remove("hidden")
+            openEditModal(todo, currentProject)
+        })        
         
         task.appendChild(title)
         task.appendChild(date)
         task.appendChild(priority)
         task.appendChild(status)
         task.appendChild(deleteTask)
+        task.appendChild(edit)
         taskList.appendChild(task)
     }
 
     export function renderTodos(arr, currentProject) {
+                let taskList = document.getElementById("task-list")
+                    taskList.innerHTML = ""
         for (let i = 0; i < arr.length; i++) {
             renderTodo(arr[i], currentProject)
         }

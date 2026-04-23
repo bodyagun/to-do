@@ -1,27 +1,19 @@
 export default class Project {
     constructor(title) {
-        this.title = title
-        this.todos = []
+        this.title = title;
+        this.id = crypto.randomUUID();
+        this.todos = [];
     }
 
     addTodo(todo) {
-        this.todos.push(todo)
+        this.todos.push(todo);
     }
 
     removeTodo(id) {
-        for (let i = 0; i < this.todos.length; i++) {
-            if (this.todos[i].id === id) {
-                this.todos.splice(i, 1)
-                break
-            }
-        }
+        this.todos = this.todos.filter(todo => todo.id !== id);
     }
 
     getTodo(id) {
-        for (let i = 0; i < this.todos.length; i++) {
-            if (this.todos[i].id === id) {
-                return this.todos[i]
-            }
-        }
+        return this.todos.find(todo => todo.id === id);
     }
-}
+} 

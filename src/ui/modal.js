@@ -1,3 +1,5 @@
+import { renderTodos } from "./renderTodos.js"
+
 export function openModal() {
         let modal = document.getElementById("modal")
         modal.innerHTML = `
@@ -45,4 +47,66 @@ export function openProjectModal() {
   </fieldset>
 </form>
     `
+}
+
+export function openEditModal(todo, currentProject) {
+    let modal = document.getElementById("modal")
+    modal.innerHTML = `
+  <form id="edit-form">
+  <fieldset>
+    <legend>Edit Task</legend>
+
+    <div class="form-group">
+      <label for="edit-title">Title</label>
+      <input type="text" id="edit-title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="edit-date">Due Date</label>
+      <input type="date" id="edit-date">
+    </div>
+
+    <div class="form-group">
+      <label for="edit-priority">Priority</label>
+      <select id="edit-priority">
+        <option value="high">High</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="edit-status">Status</label>
+      <select id="edit-status">
+        <option value="false">Pending</option>
+        <option value="true">Done</option>
+      </select>
+    </div>
+
+    <button type="submit" id="save-btn">Save</button>
+  </fieldset>
+</form>
+  `
+  let editTitle = document.getElementById("edit-title")
+  editTitle.value = todo.title
+
+  let editDate = document.getElementById("edit-date")
+  editDate.value = todo.date
+
+  let editPriority = document.getElementById("edit-priority")
+  editPriority.value = todo.priority
+
+  let editStatus = document.getElementById("edit-status")
+  editStatus.value = todo.status
+
+  let form = document.getElementById("edit-form")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    todo.title = editTitle.value
+    todo.date = editDate.value
+    todo.priority = editPriority.value
+    todo.status = editStatus.value
+    renderTodos(currentProject.todos, currentProject)
+    let modalOverlay = document.getElementById("modal-overlay")
+    modalOverlay.classList.add("hidden")
+  })
 }
