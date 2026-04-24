@@ -1,16 +1,37 @@
-import Todo from "./logic/todo.js"
+import { Todo, currentDate } from "./logic/todo.js"
 import Project from "./logic/project.js"
 import { renderProjects, currProj } from "./ui/renderProjects.js"
 import { renderTodo, renderTodos } from "./ui/renderTodos.js"
 import { openModal, openProjectModal } from "./ui/modal.js"
-const general = new Project("General")
-const projects = []
-projects.push(general)
-renderProjects(projects, setCurrentProject)
-let currentProject = general
-const modalOverlay = document.getElementById("modal-overlay")
-currProj(general)
+import { saveToStorage, loadFromStorage } from "./logic/storage.js"
 
+const projects = []
+const data = loadFromStorage()
+
+if (data) {
+    data.forEach(p => {
+        const project = new Project(p.title)
+        project.id = p.id
+        p.todos.forEach(t => {
+            const todo = new Todo(t.title, t.date, t.priority, t.status)
+            todo.id = t.id
+            todo.status = t.status
+            project.todos.push(todo)
+        })
+        projects.push(project)
+    })
+} else {
+    const general = new Project("General")
+    projects.push(general)  
+    currProj(general)
+}
+
+currProj(projects[0])
+renderTodos(projects[0].todos, projects[0])
+
+renderProjects(projects, setCurrentProject)
+let currentProject = projects[0]
+const modalOverlay = document.getElementById("modal-overlay")
 
 function setCurrentProject(arr) {
     currentProject = arr
@@ -33,8 +54,8 @@ addTaskBtn.addEventListener("click", () => {
     currentProject.addTodo(todo)
     renderTodo(todo, currentProject)
     modalOverlay.classList.add("hidden")
+    saveToStorage(projects)
     })
-
     modalOverlay.classList.remove("hidden")
 })
 
@@ -51,6 +72,7 @@ addProjectBtn.addEventListener("click", () => {
         setCurrentProject(project)
         renderProjects(projects, setCurrentProject)
         modalOverlay.classList.add("hidden")
+            saveToStorage(projects)
     })
     modalOverlay.classList.remove("hidden")
 })
@@ -61,3 +83,21 @@ allTasks.addEventListener("click", () => {
     const taskList = document.getElementById("task-list")
     renderTodos(allTodos, currentProject)
 })
+
+const doneTasks = document.getElementById("done")
+doneTasks.addEventListener("click", () => {
+    const done = projects.flatMap(p => p.todos).filter(t => t.status === true)
+    renderTodos(done, currentProject)
+console.log(projects.flatMap(p => p.todos))
+console.log(projects.flatMap(p => p.todos).filter(t => t.status === true))
+})
+
+const dueTasks = document.getElementById("due")
+dueTasks.addEventListener("click", () => {
+    const due = projects.flatMap(p => p.todos).filter(t => t.date < currentDate())
+    renderTodos(due, currentProject)
+})
+
+export function getProjects() {
+    return projects
+}

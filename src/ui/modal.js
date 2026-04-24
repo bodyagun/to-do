@@ -1,4 +1,6 @@
 import { renderTodos } from "./renderTodos.js"
+import { saveToStorage, loadFromStorage } from "../logic/storage.js"
+import { getProjects } from "../main.js"
 
 export function openModal() {
         let modal = document.getElementById("modal")
@@ -104,9 +106,10 @@ export function openEditModal(todo, currentProject) {
     todo.title = editTitle.value
     todo.date = editDate.value
     todo.priority = editPriority.value
-    todo.status = editStatus.value
+    todo.status = editStatus.value === "true"
     renderTodos(currentProject.todos, currentProject)
     let modalOverlay = document.getElementById("modal-overlay")
     modalOverlay.classList.add("hidden")
+    saveToStorage(getProjects())
   })
 }
