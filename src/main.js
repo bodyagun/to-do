@@ -26,8 +26,10 @@ if (data) {
     currProj(general)
 }
 
-currProj(projects[0])
-renderTodos(projects[0].todos, projects[0])
+if (projects.length > 0) {
+  currProj(projects[0])
+  renderTodos(projects[0].todos, projects[0])
+}
 
 renderProjects(projects, setCurrentProject)
 let currentProject = projects[0]

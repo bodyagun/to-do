@@ -1,14 +1,30 @@
 :root {
-    --background-color: rgb(154, 146, 146);
+    --background-color: rgb(37, 37, 37);
+    --sidebar-color: rgb(18, 18, 18);
+    --border-color: ;
+    --header-color: ;
+    --green: rgb(143, 202, 143);
+    --red: ;
+    --orange: rgb(221, 175, 89);
+    --font-color:  rgb(235, 235, 235);
+    --hover: rgb(46, 46, 46);
+}
+
+svg {
+    height: 27px;
+    width: 27px;
+}
+
+ul {
+  list-style: none;
 }
 
 * {
-    border: 1px solid cyan;
+    border: 1px solid red;
     color: white;
-    background-color: var(--background-color);
     font-family: "Raleway", Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 500;
-    font-size: 17px
+    font-size: 19px;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -18,21 +34,145 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-.del {
-    fill: white;
+.del-btn path{
+  fill: white;
 }
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 250px 5fr;
     grid-template-rows: auto;
     height: 100vh;
-}
-
-.sidebar {
-    height: 100%;
+    background-color: var(--background-color);
 }
 
 .main {
     height: 100%;
 }
+
+/*sidebar*/
+
+.sidebar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--sidebar-color);
+}
+
+.sidebar button {
+    color: var(--font-color)
+}
+
+h1 {
+    font-size: 55px;
+    text-align: center;
+    font-family: "Bebas Neue";
+    color: white;
+    margin-bottom: -10px
+}
+
+.global {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    padding: 10px 0px;
+    gap: 5px;
+}
+
+.global svg {
+    width: 40px;
+    height: 40px;
+}
+
+#alltasks, #done, #due {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#done svg * {
+    color: var(--green)
+}
+
+#due svg * {
+    color: var(--orange)
+}
+
+.global button {
+    width: 80%;
+    align-self: center;
+    padding-left: 50px;
+}
+
+.global button:hover {
+    background-color: var(--hover);
+    color: white;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.proj-title p {
+    font-size: 40px;
+    font-family: "Bebas Neue";
+    margin-bottom: 10px;
+}
+
+.proj-title {
+    align-self: center;
+}
+
+#project-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#project-list li button:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    font-size: 20px;
+    max-width: 125px;
+}
+
+#addProjectBtn {
+    align-self: center;
+}
+
+/*modal*/
+
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+#modal-overlay.hidden {
+  display: none;
+}
+
+#modal {
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 350px;
+}
+
+/**/
