@@ -27,10 +27,17 @@ export function openModal() {
       </select>
     </div>
 
+    <div class="form-btns">
     <button type="submit" class="create">Add</button>
+    <button type="button" id="cancel-btn">Cancel</button>
+    </div>
   </fieldset>
 </form>
         `
+
+    document.getElementById("cancel-btn").addEventListener("click", () => {
+    document.getElementById("modal-overlay").classList.add("hidden")
+})
 }
 
 export function openProjectModal() {
@@ -45,10 +52,16 @@ export function openProjectModal() {
       <input type="text" id="project-title" required>
     </div>
 
+    <div class="form-btns">
     <button type="submit" class="create">Create</button>
+    <button type="button" id="cancel-btn">Cancel</button>
+    </div>
   </fieldset>
 </form>
     `
+    document.getElementById("cancel-btn").addEventListener("click", () => {
+    document.getElementById("modal-overlay").classList.add("hidden")
+})
 }
 
 export function openEditModal(todo, currentProject) {
@@ -84,10 +97,17 @@ export function openEditModal(todo, currentProject) {
       </select>
     </div>
 
+    <div class="form-btns">
     <button type="submit" id="save-btn">Save</button>
+    <button type="button" id="cancel-btn">Cancel</button>
+    </div>
   </fieldset>
 </form>
   `
+
+  document.getElementById("cancel-btn").addEventListener("click", () => {
+    document.getElementById("modal-overlay").classList.add("hidden")
+})
   let editTitle = document.getElementById("edit-title")
   editTitle.value = todo.title
 
